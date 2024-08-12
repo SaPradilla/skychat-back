@@ -9,7 +9,7 @@ export class AuthRoutes{
     static get routes():Router{
 
 
-        const router = Router()
+        const router = Router();
 
 
         const datasource = new AuthDatasourceImpl();
@@ -18,7 +18,8 @@ export class AuthRoutes{
 
         const controller = new AuthController(authRespository);
 
-        router.post('/register',controller.registerUser)
+        router.post('/register',controller.registerUser);
+        router.post('/login',controller.loginUser);
 
         return router
     }

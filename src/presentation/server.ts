@@ -32,11 +32,11 @@ export class Server{
 
         this.middleware();
 
-        this.app.use( this.routes )
+        this.app.use('/api/v1' ,this.routes )
 
 
         this.app.listen(this.port,()=>{
-            console.log(`Server running in http://localhost:${this.port}`);
+            console.log(`Server running in http://localhost:${this.port}/api/v1`);
         })
 
 

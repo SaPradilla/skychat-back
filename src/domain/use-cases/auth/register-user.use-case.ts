@@ -17,7 +17,7 @@ type SignToken = (payload : Object, Duration?:string)=> Promise<string | null>;
 
 
 interface RegisterUserUseCase{
-    execute( registerUserDto: RegisterUserDto) : Promise<any>;
+    execute( registerUserDto: RegisterUserDto) : Promise<UserToken>;
 }
 
 export class RegisterUser implements RegisterUserUseCase{
@@ -29,7 +29,7 @@ export class RegisterUser implements RegisterUserUseCase{
     ){}
 
 
-    async execute(registerUserDto: RegisterUserDto): Promise<any> {
+    async execute(registerUserDto: RegisterUserDto): Promise<UserToken> {
 
 
         const user = await this.authRepository.register(registerUserDto);
