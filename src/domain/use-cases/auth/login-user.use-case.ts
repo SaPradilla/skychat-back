@@ -1,3 +1,4 @@
+import { UserAuthResponse } from 'skychat'; 
 import { JwtAdapter } from '../../../config';
 import { LoginUserDto } from '../../dtos/auth/login-user.dto';
 import { AuthRepository } from '../../repositories/auth.repository';
@@ -5,21 +6,12 @@ import { CustomError } from '../../errors/custom.error';
 
 
 
-interface UserToken {
-    token:string;
-    user:{
-        id:string;
-        username:string;
-        email:string;
-    };
-}
-
 type SignToken = (payload : Object, Duration?:string)=> Promise<string | null>;
 
 
 
 interface LoginUseCase{
-    execute( loginUserDto:LoginUserDto ) : Promise<UserToken>;
+    execute( loginUserDto:LoginUserDto ) : Promise<UserAuthResponse>;
 }
 
 export class LoginUser implements LoginUseCase{
@@ -30,7 +22,7 @@ export class LoginUser implements LoginUseCase{
     ){}
 
 
-    async execute(loginUserDto: LoginUserDto): Promise<UserToken> {
+    async execute(loginUserDto: LoginUserDto): Promise<UserAuthResponse> {
 
         const user = await this.authRepository.login(loginUserDto );
         

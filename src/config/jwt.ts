@@ -10,7 +10,7 @@ export class JwtAdapter {
             jwt.sign( payload , envs.JWT_KEY, { expiresIn : duration }, (err, token) =>{
                 if( err ) return resolve(null);
                 resolve(token!);
-            })   
+            });
         })
         
     }

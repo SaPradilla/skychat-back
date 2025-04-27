@@ -1,5 +1,6 @@
 import express,{ Application, Router } from "express"
-
+import cors from 'cors';
+import morgan from 'morgan';
 
 interface Options{
     port:number;
@@ -23,8 +24,10 @@ export class Server{
     }
 
     middleware(){
-        this.app.use( express.json() )
-        this.app.use( express.urlencoded({ extended: true}) )
+        this.app.use( cors());
+        this.app.use( morgan('combined'));
+        this.app.use( express.json() );
+        this.app.use( express.urlencoded({ extended: true}) );
     }
 
 
@@ -32,15 +35,11 @@ export class Server{
 
         this.middleware();
 
-        this.app.use('/api/v1' ,this.routes )
-
+        this.app.use('/api/v1',this.routes );
 
         this.app.listen(this.port,()=>{
             console.log(`Server running in http://localhost:${this.port}/api/v1`);
-        })
-
-
-
+        });
     }
 
 }

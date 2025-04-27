@@ -2,22 +2,14 @@ import { RegisterUserDto } from '../../dtos/auth/register-user.dto';
 import { AuthRepository } from '../../repositories/auth.repository';
 import { JwtAdapter } from '../../../config/jwt';
 import { CustomError } from '../../errors/custom.error';
+import { UserAuthResponse } from 'skychat';
 
-
-interface UserToken {
-    token:string;
-    user:{
-        id:string;
-        username:string;
-        email:string;
-    };
-}
 
 type SignToken = (payload : Object, Duration?:string)=> Promise<string | null>;
 
 
 interface RegisterUserUseCase{
-    execute( registerUserDto: RegisterUserDto) : Promise<UserToken>;
+    execute( registerUserDto: RegisterUserDto) : Promise<UserAuthResponse>;
 }
 
 export class RegisterUser implements RegisterUserUseCase{
@@ -29,7 +21,7 @@ export class RegisterUser implements RegisterUserUseCase{
     ){}
 
 
-    async execute(registerUserDto: RegisterUserDto): Promise<UserToken> {
+    async execute(registerUserDto: RegisterUserDto): Promise<UserAuthResponse> {
 
 
         const user = await this.authRepository.register(registerUserDto);

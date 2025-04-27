@@ -9,7 +9,7 @@ import { UserMapper } from '../';
 type HashFunction = (password:string) => string;
 type CompareFunction = (password:string, hashed:string) => boolean;
 
-
+    
 export class AuthDatasourceImpl implements AuthDatasource{
 
 
